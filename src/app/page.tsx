@@ -236,7 +236,7 @@ function FloatingHearts() {
             delay: heart.delay,
           }}
         >
-          ❤️
+          💐
         </motion.div>
       ))}
     </div>
