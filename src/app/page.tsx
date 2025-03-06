@@ -1,11 +1,11 @@
 // pages/index.js
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const name = searchParams.get("name");
 
@@ -21,7 +21,7 @@ export default function Home() {
   const Thao =
     "Chúc chị Thảo một Ngày Quốc tế Phụ nữ tràn đầy niềm vui, hạnh phúc và thành công! ✨ Mong chị luôn giữ vững nhiệt huyết, tỏa sáng rực rỡ trong công việc và cuộc sống. Chúc chị mỗi ngày đều ngập tràn yêu thương và những điều tốt đẹp nhất! 💜💐💜";
 
-  const [message, setMessage] = useState<String>(everyOne);
+  const [message, setMessage] = useState<string>(everyOne);
 
   useEffect(() => {
     if (name === "Thu") {
@@ -52,7 +52,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-200 max-lg:pb-10">
+    <div className="relative min-h-screen bg-gradient-to-br from-pink-100 to-purple-200 max-lg:pb-10">
       {showConfetti && <Confetti />}
 
       <main className="container mx-auto px-4 py-1 ">
@@ -63,7 +63,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            Chúc mừng ngày Quốc tế Phụ nữ 8/3
+            Chúc Mừng Ngày Quốc Tế Phụ Nữ 8/3
           </motion.h1>
 
           <motion.p
@@ -100,6 +100,14 @@ export default function Home() {
         <FloatingHearts />
       </main>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
 
